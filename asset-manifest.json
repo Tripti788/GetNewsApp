@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Tripti788/GetNewsApp/static/css/main.f855e6bc.css",
+    "main.js": "/Tripti788/GetNewsApp/static/js/main.d052bca7.js",
+    "static/js/453.7fd355be.chunk.js": "/Tripti788/GetNewsApp/static/js/453.7fd355be.chunk.js",
+    "static/media/backg_vdo.mp4": "/Tripti788/GetNewsApp/static/media/backg_vdo.7543d05e5b95d8ddd329.mp4",
+    "static/media/image_converted.jpg": "/Tripti788/GetNewsApp/static/media/image_converted.8158edb6221bf7107946.jpg",
+    "index.html": "/Tripti788/GetNewsApp/index.html",
+    "main.f855e6bc.css.map": "/Tripti788/GetNewsApp/static/css/main.f855e6bc.css.map",
+    "main.d052bca7.js.map": "/Tripti788/GetNewsApp/static/js/main.d052bca7.js.map",
+    "453.7fd355be.chunk.js.map": "/Tripti788/GetNewsApp/static/js/453.7fd355be.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.d052bca7.js"
+  ]
+}
