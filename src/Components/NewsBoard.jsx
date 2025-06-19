@@ -6,8 +6,8 @@ const NewsBoard = ({ category }) => {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [totalArticles, setTotalArticles] = useState(0);
   const [error, setError] = useState(null);
-  const [noMoreData, setNoMoreData] = useState(false);
 
   const apiKey = '00654db19d91db0075fcb6dc3d4413ac';
   const pageSize = 9;
@@ -16,8 +16,9 @@ const NewsBoard = ({ category }) => {
     setLoading(true);
     try {
       let url = `https://gnews.io/api/v4/top-headlines?country=in&lang=en&page=${page}&max=${pageSize}&token=${apiKey}`;
+
       if (category !== 'general') {
-        url = `https://gnews.io/api/v4/search?q=${category}&country=in&lang=en&page=${page}&max=${pageSize}&token=${apiKey}`;
+        url = `https://gnews.io/api/v4/search?q=${category}&country=in&lang=en&sortby=publishedAt&page=${page}&max=${pageSize}&token=${apiKey}`;
       }
 
       const response = await fetch(url);
@@ -26,29 +27,18 @@ const NewsBoard = ({ category }) => {
       }
       const data = await response.json();
 
-      // Filter out duplicates
-      const newArticles = data.articles.filter(
-        (newItem) => !articles.some((existingItem) => existingItem.url === newItem.url)
-      );
-
-      if (newArticles.length === 0) {
-        setNoMoreData(true);
-      } else {
-        setArticles((prevArticles) => [...prevArticles, ...newArticles]);
-      }
-      
+      setArticles(data.articles);
+      setTotalArticles(data.totalArticles);
+      setLoading(false);
     } catch (err) {
       console.error(err);
       setError('Failed to fetch news.');
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
-    // Reset everything on category change
-    setArticles([]);
     setPage(1);
-    setNoMoreData(false);
   }, [category]);
 
   useEffect(() => {
@@ -58,6 +48,8 @@ const NewsBoard = ({ category }) => {
   if (error) {
     return <div className="text-center text-danger">{error}</div>;
   }
+
+  const totalPages = Math.ceil(totalArticles / pageSize);
 
   return (
     <div className="container my-3">
@@ -83,7 +75,7 @@ const NewsBoard = ({ category }) => {
 
       <div className="container d-flex justify-content-between my-4">
         <button
-          disabled={page === 1 || loading}
+          disabled={page === 1}
           className="btn btn-dark"
           onClick={() => setPage(page - 1)}
         >
@@ -91,7 +83,7 @@ const NewsBoard = ({ category }) => {
         </button>
 
         <button
-          disabled={noMoreData || loading}
+          disabled={page >= totalPages}
           className="btn btn-dark"
           onClick={() => setPage(page + 1)}
         >

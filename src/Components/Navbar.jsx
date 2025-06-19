@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 const Navbar = ({ setCategory }) => {
-  const categories = ["technology", "business", "sports", "entertainment", "science", "health"];
+  const categories = ["general", "technology", "business", "sports", "entertainment", "science", "health"];
   const [activeCategory, setActiveCategory] = useState("general");
   const navRef = useRef(null);
   const [underlineStyle, setUnderlineStyle] = useState({});
@@ -28,18 +28,6 @@ const Navbar = ({ setCategory }) => {
         <a className="navbar-brand" href="#">
           <span className="badge bg-dark text-light fs-5">GetNews</span>
         </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
         <div className="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
           <div className="navbar-nav d-flex justify-content-center align-items-center position-relative">
             {categories.map((category) => (
@@ -58,7 +46,6 @@ const Navbar = ({ setCategory }) => {
               </div>
             ))}
 
-            {/* The red underline */}
             <div
               style={{
                 position: 'absolute',
